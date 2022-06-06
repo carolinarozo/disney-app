@@ -2,8 +2,10 @@ package com.alkemy.disney.disney.Entity;
 
 import lombok.Getter;
 import lombok.Setter;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -16,8 +18,14 @@ public class PeliculaSerieEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long id;
-    private String nombre;
+    private String titulo;
     private String imagen;
+
+    @Column(name="fecha_creacion")
+    @DateTimeFormat(pattern = "yyyy/MM/dd")
+    private LocalDate fechaCreacion;
+
+    private Long calificacion;
 
     @ManyToOne(fetch = FetchType.EAGER,cascade = CascadeType.ALL)
     @JoinColumn(name = "tipo_id",insertable = false,updatable = false)
